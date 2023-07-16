@@ -1,29 +1,41 @@
 import { ButtonContainer } from './style'
 import { ButtonLink } from './style'
 
-type Props = {
+export type Props = {
   type: 'button' | 'link'
   title: string
   to?: string
   onClick?: () => void
   children: string
+  variant?: 'primary' | 'secondary'
 }
 
-const Button = ({ type, title, to, onClick, children }: Props) => {
+const Button = ({
+  type,
+  title,
+  to,
+  onClick,
+  children,
+  variant = 'primary'
+}: Props) => {
   if (type === 'button') {
     return (
-      <ButtonLink
-        to={to as string}
+      <ButtonContainer
+        variant={variant}
         type="button"
         title={title}
         onClick={onClick}
       >
         {children}
-      </ButtonLink>
+      </ButtonContainer>
     )
   }
 
-  return <ButtonContainer title={title}>{children}</ButtonContainer>
+  return (
+    <ButtonLink to={to as string} type="button" title={title}>
+      {children}
+    </ButtonLink>
+  )
 }
 
 export default Button
